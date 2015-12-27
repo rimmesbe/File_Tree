@@ -127,45 +127,42 @@ Notes
         _h3_ = document.createElement('h3'),
         _a_ = document.createElement('a');
 
-    var global_count = 0
+    var global_count = 0;
 
     var buildTree = function(data) {
         var count = 0;
         var div = _div_.cloneNode(false);
-
         div.appendChild(buildBranch(data, div, count));
-
         return div;
     };
 
-    var buildLabel = function(idx, data){
+    var buildLabel = function(count, label){
         var h3 = _h3_.cloneNode(false);
         var a = _a_.cloneNode(false);
-        a.appendChild(document.createTextNode(data["label"]));
-        a.setAttribute('href', '.branch'+idx.toString());
+        a.appendChild(document.createTextNode(label));
+        a.setAttribute('href', '.branch'+count.toString());
         a.setAttribute('data-toggle', 'collapse');
         h3.appendChild(a);
         return h3;
     };
 
-
-    var buildBranch = function(data, element, idx) {
-        var count = idx;
+    var buildBranch = function(data, element, current_count) {
+        var count = current_count;
         var div = element;
         var ul = _ul_.cloneNode(false);
-        div.appendChild(buildLabel(count, data));
+        ul.setAttribute('class', 'branch'+count.toString());
+        div.appendChild(buildLabel(count, data["label"]));
 
         if(data.hasOwnProperty("items")){
             for(var i=0; i<data.items.length; i++){
                 global_count += 1;
                 var li = _li_.cloneNode(false);
                 var div = _div_.cloneNode(false);
-                div.appendChild(buildBranch(data.items[i], div, (global_count)));
+                div.appendChild(buildBranch(data.items[i], div, global_count));
                 li.appendChild(div);
                 ul.appendChild(li);
             }
         }
-        ul.setAttribute('class', 'branch'+count.toString());
         return ul;
     };
 
