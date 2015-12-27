@@ -1,0 +1,126 @@
+<!--
+
+TreeView
+=========
+Represent the following data structure as an expandable TreeView.
+
+var items = {
+    label: 'Node Label',
+    items: [
+        {
+            label: 'Child Node Label',
+            items: [
+                {
+                    label: 'Child Node Label',
+                    items: [
+                        {
+                            label: 'Child Node Label',
+                            items: [
+
+                            ]
+                        },
+                        {
+                            label: 'Child Node Label',
+                        },
+                        {
+                            label: 'Leaf Node Label'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Leaf Node Label'
+        }
+    ]
+};
+
+The TreeView should have the following features:
+
+1. It should be able to read a hierarchical data-structure like the one shown above.
+2. It should provide expand/collapse behavior at the node level
+3. By default the TreeView should expand all levels
+4. Define an API that makes it easier to use
+
+Notes
+======
+- You cannot use any UI libraries and the tree-view has to be built from scratch
+- The only permitted library is jQuery and Bootstrap
+- Use best practices to write clean, well-refactored code
+- Bonus points for styling the TreeView
+- Bonus for writing Unit Tests
+- You have 24 hours to complete the exercise
+
+ -->
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>TreeView</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+ </head>
+ <body>
+
+ <div class="container">
+     <!-- The TreeView DOM goes here -->
+ </div>
+
+ <script type="text/javascript">
+    var items = {
+    label: 'Node Label',
+    items: [
+        {
+            label: 'Child Node Label',
+            items: [
+                {
+                    label: 'Child Node Label',
+                    items: [
+                        {
+                            label: 'Child Node Label',
+                            items: [
+
+                            ]
+                        },
+                        {
+                            label: 'Child Node Label',
+                        },
+                        {
+                            label: 'Leaf Node Label'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            label: 'Leaf Node Label'
+        }
+    ]
+};
+     // Build the TreeView and render
+    var _ul_ = document.createElement('ul'),
+        _li_ = document.createElement('li'),
+        _span_ = document.createElement('span');
+
+
+    var buildTree = function(data) {
+        var ul = _ul_.cloneNode(false);
+
+        for(var key in data) {
+            console.log(key + ":" + data[key])
+            if(data.hasOwnProperty(key) && key == "label"){
+                // create label element and append
+            } else if(data.hasOwnProperty(key) && key == "items"){
+                // create item element and append
+                for(var i=0; i<data.items.length; i++){
+                    buildTree(data.items[i]);
+                }
+            }
+        }
+
+        return ul;
+    };
+ </script>
+ </body>
+ </html>
