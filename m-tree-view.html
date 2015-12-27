@@ -111,7 +111,7 @@ Notes
     var buildTree = function(data, idx) {
         var count = idx || 0
         var ul = _ul_.cloneNode(false);
-        ul.setAttribute('id', ('branch'+count.toString()));
+        ul.setAttribute('class', ('branch'+count.toString()));
 
         for(var key in data) {
             console.log(key + ":" + data[key])
@@ -119,7 +119,8 @@ Notes
                 var h3 = _h3_.cloneNode(false);
                 var a = _a_.cloneNode(false);
                 a.appendChild(document.createTextNode(data[key]));
-                a.setAttribute('href', ('#branch'+count.toString()));
+                a.setAttribute('href', ('.branch'+(count+1).toString()));
+                a.setAttribute('data-toggle', 'collapse');
                 h3.appendChild(a);
                 ul.appendChild(h3);
             } else if(data.hasOwnProperty(key) && key == "items"){
@@ -132,12 +133,11 @@ Notes
                 }
             }
         }
-
+        count += 1;
         return ul;
     };
 
     document.querySelector('.container').appendChild(buildTree(items));
-    document.querySelector('a').setAttribute('data-toggle', 'collapse');
     document.querySelector('ul').setAttribute('class', 'collapse in');
  </script>
  </body>
