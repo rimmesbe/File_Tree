@@ -70,6 +70,7 @@ Notes
  </div>
 
  <script type="text/javascript">
+
     var items = {
     label: 'Node Label',
     items: [
@@ -81,9 +82,6 @@ Notes
                     items: [
                         {
                             label: 'Child Node Label',
-                            items: [
-
-                            ]
                         },
                         {
                             label: 'Child Node Label',
@@ -92,53 +90,86 @@ Notes
                             label: 'Leaf Node Label'
                         }
                     ]
+                },
+                {
+                    label: 'Leaf Node'
                 }
             ]
         },
         {
-            label: 'Leaf Node Label'
+            label: 'Leaf Node Label',
+            items: [
+                {
+                    label: 'Child Node Label',
+                    items: [
+                        {
+                            label: 'Child Node Label',
+                        },
+                        {
+                            label: 'Child Node Label',
+                        },
+                        {
+                            label: 'Leaf Node Label'
+                        }
+                    ]
+                },
+                {
+                    label: 'Leaf Node'
+                }
+            ]
         }
     ]
 };
      // Build the TreeView and render
     var _ul_ = document.createElement('ul'),
         _li_ = document.createElement('li'),
-        _span_ = document.createElement('span'),
+        _div_ = document.createElement('div'),
         _h3_ = document.createElement('h3'),
         _a_ = document.createElement('a');
 
+    var global_count = 0
 
-    var buildTree = function(data, idx) {
-        var count = idx || 0
+    var buildTree = function(data) {
+        var count = 0;
+        var div = _div_.cloneNode(false);
+
+        div.appendChild(buildBranch(data, div, count));
+
+        return div;
+    };
+
+    var buildLabel = function(idx, data){
+        var h3 = _h3_.cloneNode(false);
+        var a = _a_.cloneNode(false);
+        a.appendChild(document.createTextNode(data["label"]));
+        a.setAttribute('href', '.branch'+idx.toString());
+        a.setAttribute('data-toggle', 'collapse');
+        h3.appendChild(a);
+        return h3;
+    };
+
+
+    var buildBranch = function(data, element, idx) {
+        var count = idx;
+        var div = element;
         var ul = _ul_.cloneNode(false);
-        ul.setAttribute('class', ('branch'+count.toString()));
+        div.appendChild(buildLabel(count, data));
 
-        for(var key in data) {
-            console.log(key + ":" + data[key])
-            if(data.hasOwnProperty(key) && key == "label"){
-                var h3 = _h3_.cloneNode(false);
-                var a = _a_.cloneNode(false);
-                a.appendChild(document.createTextNode(data[key]));
-                a.setAttribute('href', ('.branch'+(count+1).toString()));
-                a.setAttribute('data-toggle', 'collapse');
-                h3.appendChild(a);
-                ul.appendChild(h3);
-            } else if(data.hasOwnProperty(key) && key == "items"){
-                // create item element and append
+        if(data.hasOwnProperty("items")){
+            for(var i=0; i<data.items.length; i++){
+                global_count += 1;
                 var li = _li_.cloneNode(false);
-                li.appendChild(document.createTextNode(data[key]));
+                var div = _div_.cloneNode(false);
+                div.appendChild(buildBranch(data.items[i], div, (global_count)));
+                li.appendChild(div);
                 ul.appendChild(li);
-                for(var i=0; i<data.items.length; i++){
-                    li.appendChild(buildTree(data.items[i], count+1));
-                }
             }
         }
-        count += 1;
+        ul.setAttribute('class', 'branch'+count.toString());
         return ul;
     };
 
     document.querySelector('.container').appendChild(buildTree(items));
-    document.querySelector('ul').setAttribute('class', 'collapse in');
  </script>
  </body>
  </html>
