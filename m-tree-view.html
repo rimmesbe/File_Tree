@@ -128,8 +128,23 @@ Notes
     ]
     };
 
+    var expandAll = document.createElement('a');
+    expandAll.setAttribute('id', 'expand');
+    expandAll.appendChild(document.createTextNode("Expand All"));
     var sampleTree = new treeGrower(items);
     document.querySelector('.container').appendChild(sampleTree.buildTree());
+    document.querySelector('.container').appendChild(expandAll);
+
+    $(document).ready(function() {
+        $("#expand").on('click', function(e){
+            $( "ul" ).each(function( index ) {
+                console.log(this);
+                $( this ).addClass('collapse in').delay(2800);
+                $( this ).attr('aria-expanded', 'true');
+                $( this ).attr('style', 'none');
+            });
+        });
+    });
  </script>
  </body>
  </html>

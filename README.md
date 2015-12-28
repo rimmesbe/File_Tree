@@ -6,3 +6,4 @@ created file tree from nested json
 -move js logic to js file, made instantiable object 'treeGrower'
 -imported bootstrap for collapsable functionality
 -created some jasmine unit tests
+-removed standard 'li' bullet symbols and replaced with '+' where expandable
