@@ -7,3 +7,4 @@ created file tree from nested json
 -imported bootstrap for collapsable functionality
 -created some jasmine unit tests
 -removed standard 'li' bullet symbols and replaced with '+' where expandable
+-created 'expand all' link that expands all directories
