@@ -8,3 +8,6 @@ created file tree from nested json
 -created some jasmine unit tests
 -removed standard 'li' bullet symbols and replaced with '+' where expandable
 -created 'expand all' link that expands all directories
+
+
+open SpecRunner.html in jasmine folder, in a browser to run tests.
