@@ -64,6 +64,7 @@ Notes
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="createTree.js"></script>
+    <script src="expand.js"></script>
     <link rel="shortcut icon" type="image/png" href="jasmine/lib/jasmine-2.4.1/jasmine_favicon.png">
     <link rel="stylesheet" type="text/css" href="jasmine/lib/jasmine-2.4.1/jasmine.css">
     <script type="text/javascript" src="jasmine/lib/jasmine-2.4.1/jasmine.js"></script>
@@ -131,16 +132,6 @@ Notes
 
     var sampleTree = new treeGrower(items);
     document.querySelector('.container').appendChild(sampleTree.buildTree());
-
-    $(document).ready(function() {
-        $("#expand").on('click', function(e){
-            $( "ul" ).each(function( index ) {
-                $( this ).addClass('collapse in');
-                $( this ).attr('aria-expanded', 'true');
-                $( this ).attr('style', 'none');
-            });
-        });
-    });
  </script>
  </body>
  </html>
