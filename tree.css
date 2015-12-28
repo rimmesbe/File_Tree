@@ -1,0 +1,10 @@
+ul {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 2em;
+  text-indent: -1em;
+}
+
+a.items:before {
+  content: "+";
+}
