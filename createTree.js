@@ -6,7 +6,12 @@ function treeGrower(data){
   this.buildTree = function(){
     this.permaCount = 0;
     var div = document.createElement('div');
+    var expandAll = document.createElement('a');
+    expandAll.setAttribute('id', 'expand');
+    expandAll.appendChild(document.createTextNode("Expand All"));
+
     div.appendChild(this.buildBranch(this.treeData, div, this.permaCount));
+    div.appendChild(expandAll);
     return div;
   };
 
